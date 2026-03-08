@@ -1,5 +1,7 @@
 # AusWeis — Cloudflare Turnstile 人机验证插件
 
+[CN](https://github.com/ChineseLiyao/AusWeisPlugin/blob/main/README_CN.md) | [EN](https://github.com/ChineseLiyao/AusWeisPlugin/blob/main/README.md)
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Bukkit](https://img.shields.io/badge/Bukkit-1.13+-orange.svg)](https://www.spigotmc.org/)
 [![Paper](https://img.shields.io/badge/Paper-1.21+-yellow.svg)](https://papermc.io/)
