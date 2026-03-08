@@ -4,51 +4,33 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.Objects;
 
 public final class AusWeis extends JavaPlugin implements CommandExecutor {
 
-    private static AusWeis instance;
-    private ExecutorService apiPool;
     private ConfigManager configManager;
 
     @Override
     public void onEnable() {
-        instance = this;
         saveDefaultConfig();
         configManager = new ConfigManager(this);
 
-        int poolSize = configManager.getInt("thread-pool-size", 4);
-        apiPool = Executors.newFixedThreadPool(poolSize);
-
         getServer().getPluginManager().registerEvents(new PlayerLoginListener(this), this);
 
-        // 注册命令
-        getCommand("ausweis").setExecutor(this);
+        if (getCommand("ausweis") != null) Objects.requireNonNull(getCommand("ausweis")).setExecutor(this);
 
         getLogger().info("AusWeis enabled");
     }
 
     @Override
     public void onDisable() {
-        if (apiPool != null) {
-            apiPool.shutdown();
-            try {
-                if (!apiPool.awaitTermination(5, TimeUnit.SECONDS)) {
-                    apiPool.shutdownNow();
-                }
-            } catch (InterruptedException e) {
-                apiPool.shutdownNow();
-            }
-        }
         getLogger().info("AusWeis disabled");
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length != 1 || !args[0].equalsIgnoreCase("reload")) {
             sender.sendMessage("§cUsage: /" + label + " reload");
             return true;
@@ -68,14 +50,6 @@ public final class AusWeis extends JavaPlugin implements CommandExecutor {
             getLogger().severe("Error reloading config: " + e.getMessage());
         }
         return true;
-    }
-
-    public static AusWeis getInstance() {
-        return instance;
-    }
-
-    public ExecutorService getApiPool() {
-        return apiPool;
     }
 
     public ConfigManager getConfigManager() {

@@ -13,7 +13,6 @@ public class ConfigManager {
     private static final String TIMEOUT = "timeout";
     private static final String DEBUG = "debug";
     private static final String KICK_MESSAGE = "kick-message";
-    private static final String THREAD_POOL_SIZE = "thread-pool-size";
 
     public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -26,11 +25,11 @@ public class ConfigManager {
     }
 
     public String getApiUrl() {
-        return config.getString(API_URL, "http://ausweis.lya.bz/api/check?user={player}");
+        return config.getString(API_URL, "https://ausweis.lya.bz/api/check?user={player}");
     }
 
     public String getVerifyUrl() {
-        return config.getString(VERIFY_URL, "http://ausweis.lya.bz?user={player}");
+        return config.getString(VERIFY_URL, "https://ausweis.lya.bz?user={player}");
     }
 
     public int getTimeout() {
@@ -45,7 +44,4 @@ public class ConfigManager {
         return config.getString(KICK_MESSAGE, "§c⛔ Verification Required\n§7Please visit: §f{verify-url}\n§7Rejoin after verification");
     }
 
-    public int getInt(String path, int def) {
-        return config.getInt(path, def);
-    }
 }

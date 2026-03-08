@@ -75,9 +75,11 @@ public class PlayerLoginListener implements Listener {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private boolean parseVerificationResponse(String json) {
         try {
-            JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
+            JsonParser parser = new JsonParser();
+            JsonObject obj = parser.parse(json).getAsJsonObject();
             return obj.get("verified").getAsBoolean();
         } catch (Exception e) {
             plugin.getLogger().warning("Failed to parse API response: " + json);
