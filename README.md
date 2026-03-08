@@ -51,6 +51,13 @@ kick-message: "§c⛔ Verification Required\n§7Please visit the following link 
 # Async thread pool size
 thread-pool-size: 4
 ```
+---
+
+## 📌 后端参考实现
+
+本项目配套的验证网站后端由 [@ChineseLiyao](https://github.com/ChineseLiyao) 开发，源码位于：[ChineseLiyao/AusWeis](https://github.com/ChineseLiyao/AusWeis)。你可以直接部署使用或参考其实现。
+
+---
 
 **参数说明：**
 - `api-url`：你的后端 API 地址，插件会向此地址发送 GET 请求，需返回 JSON `{"verified": true/false}`。
